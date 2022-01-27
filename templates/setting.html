@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Setting
+{% endblock %}
+
+{% block main %}
+
+{% if alert == 1 %}
+    <div class="alert alert-danger" role="alert">
+      Your new password do not match! Please try again!
+    </div>
+{% endif %}
+
+<form action="/setting" method="post" >
+    <div class="text-center card mt-4 shadow-lg p-3 bg-white rounded mb-3">
+        <div class="card-header" >
+            Change username
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control form-control-lg" name="name" placeholder="New username" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="text-center card mt-4 shadow-lg p-3 bg-white rounded mb-3">
+        <div class="card-header">
+            Change password
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <input autocomplete="off" class="form-control form-control-lg mb-2" name="password" placeholder="New password" type="password">
+                <input autocomplete="off" class="form-control form-control-lg" name="confirm" placeholder="Confirm your new password" type="password">
+            </div>
+        </div>
+    </div>
+    <div class="text-center card mt-4 shadow-lg p-3 bg-white rounded mb-3">
+        <div class="card-body">
+            <button class="btn btn-warning" type="summit" name="reset" value ="r"> Reset your card list </button>
+            <button class="btn btn-secondary" type="summit" name="save" value="s"> Save changes </button>
+            <button class="btn btn-danger" type="summit" name="delete" value="d"> Delete account </button>
+        </div>
+    </div>
+    
+</form>
+
+{% endblock %}

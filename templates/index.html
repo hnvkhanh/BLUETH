@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+{% for card in CARDS | sort %}
+<div class="modal fade" id="Modal" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="summit" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" name="review" value="{{card['id']}}">
+        <h2 class="card-title">{{ card["word"] }} <span class="badge badge-info">{{ card["type"] }}</span> </h2>
+      </div>
+      <div class="modal-footer">
+        <form action="/" method="post" class="form-inline">
+          <div class= "form-group">
+            <button type="summit" class="btn btn-danger btn-next" data-dismiss="modal" value = "f{{card['id']}}" name="fluency">Fail</button>
+          </div>
+          <div class= "form-group">
+            <button type="summit" class="btn btn-warning btn-next" data-dismiss="modal" value = "n{{card['id']}}" name="fluency">Not sure</button>
+          </div>
+          <div class= "form-group">
+            <button type="summit" class="btn btn-success btn-next" data-dismiss="modal" value = "g{{card['id']}}" name="fluency">Great</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% if length == 0 %}
+
+  <div class="alert alert-warning" id="alert-no-card" role="alert">
+          You do not have any card in your list yet!
+  </div>
+  <div style="text-align: center;">
+    <a class="btn btn-secondary btn-lg" href="/add" id="plus-btn" role="button" >&plus;</a>
+  </div>
+  
+{% else %}
+
+<div class="mb-3 text-center">
+  <a class=" btn rounded-pill btn-warning btn-lg" data-toggle="modal" data-target="#Modal" role="button" id="review-btn" >
+    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+      <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
+    </svg>
+  </a>
+</div>
+
+<div class="card-columns">
+{% for i in range(length) %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ CARDS[i]["word"] }} <span class="badge badge-info">{{ CARDS[i]["type"] }}</span> </h5>
+      <p class="card-text">{{ CARDS[i]["meaning"] }}</p>
+      {% if CARDS[i]["example"] %}
+        <p class ="card-text">Ex: {{ CARDS[i]["example"] }}</p>
+      {% endif %}
+      {% if CARDS[i]["note"] %}
+        <p class ="card-text">Note: {{ CARDS[i]["note"] }}</p>
+      {% endif %}
+      <form action = "/" method ="post">
+        <button type="summit" class="btn btn-light btn-sm float-right mb-2" value= "{{CARDS[i]['id']}}" name="deleted-card" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+            </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+{%endfor%}
+</div>
+
+
+<script>
+  var trashbtns = document.getElementsByClassName("card-body");
+  var i;
+  
+  for (i = 0; i < trashbtns.length; i++) {
+    trashbtns[i].addEventListener("click", function() {
+      this.parentElement.style.display = 'none';
+    });
+  }
+  
+  $('.modal').each(function(){
+  
+  var currentModal = $(this);
+  
+  currentModal.find('.btn-next').click(function(){
+    currentModal.modal('hide');
+    currentModal.closest('.modal').nextAll('.modal').first().modal('show');
+  });
+ 
+});
+
+</script>
+
+{% endif %}
+
+{% endblock %}

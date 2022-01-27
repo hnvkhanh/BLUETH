@@ -1,0 +1,42 @@
+.btn-next{
+    margin-left: 2px;
+}
+.navbar{
+    background-color:#a3bdcf;
+}
+
+.modal{
+   background-color: rgba(0,0,0, 0.85);
+}
+
+#redirect-alert{
+    font-size: 70%;
+    height: 70%;
+    text-align: center;
+}
+#add-card{
+    width: auto;
+    background-color: #a3bdcf;
+}
+.badge{
+    font-size: 10px;
+}
+#alert-no-card
+{
+    font-size: 25px;
+    margin-top: 20px;
+}
+#plus-btn
+{
+    font-size: 30px;
+    width: 30%;
+}
+#review-btn
+{
+    width: 80%;
+}
+#logo
+{
+    font-family:'Niagara Solid';
+    font-size: 400%;
+}

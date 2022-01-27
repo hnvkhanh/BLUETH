@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add new card
+{% endblock %}
+
+{% block main %}
+
+{% if alert == 1 %}
+<div class="alert alert-danger" role="alert">
+    Must provide word to add.
+</div>
+{% elif alert == 2 %}
+<div class="alert alert-danger" role="alert">
+    Must provide type of word to add.
+</div>
+{% elif alert == 3%}
+<div class="alert alert-danger" role="alert">
+    Must provide meaning of word to add.
+</div>
+{% endif %}
+
+<div class="card text-white mb-5" id="add-card">
+    <div class="card-body">
+        <form action="/add" method = "post">
+            <input type="text" class="form-control form-group" placeholder="New word" name="word" autocomplete="off">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="type" value="noun">
+              <label class="form-check-label">Noun</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="type" value="verb">
+              <label class="form-check-label">Verb</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="type" value="adjective">
+              <label class="form-check-label">Adjective</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="type" value="adverb">
+              <label class="form-check-label" >Adverb</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="type" value="preposition">
+              <label class="form-check-label" >Preposition</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="type" value="interjection">
+              <label class="form-check-label" >Interjection</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="type" value="other">
+              <label class="form-check-label" >Other</label>
+            </div>
+            <input type="text" class="form-control form-group" placeholder="Enter meaning" name="meaning" autocomplete="off">
+            <input type="text" class="form-control form-group" placeholder="Enter example" name="example" autocomplete="off">
+            <input type="text" class="form-control form-group" placeholder="Enter note for this word" name="note" autocomplete="off">
+            <div class="text-center">
+                <button class="btn btn-light btn-lg" type = "submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card text-white" id="add-card">
+  <div class="card-header">Not sure about meaning of the word? Search here!</div>
+  <div class="card-body">
+    <form action="https://translate.google.com.vn/" method="get" target="_blank" >
+    <input type="text" class="form-control form-group" placeholder="Enter word you want to search" name="text" autocomplete="off">
+    <div class="form-row form-group">
+        <div class="col">
+            <select class="custom-select" name="sl">
+              <option selected disabled>Searched language</option>
+                {% for i in range(LANGS | length) %}
+                  <option value="{{LANGS[i]['Code']}}" >{{LANGS[i]['Language']}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+            <select class="custom-select" name="tl">
+              <option selected disabled>Translated language</option>
+                {% for i in range(LANGS | length) %}
+                  <option value="{{LANGS[i]['Code']}}" >{{LANGS[i]['Language']}}</option>
+                {% endfor %}
+            </select>
+        </div>
+     </div>
+    <div class="text-center">
+        <button class="btn btn-light btn-lg" type = "submit">Search</button>
+    </div>
+    </form>
+  </div>
+  <div class="alert alert-warning" role="alert" id="redirect-alert">
+      By taking this action, your browser will open a tab of <a href="https://translate.google.com/">Google Translate</a>.   
+  </div>
+</div>
+
+{% endblock %}
