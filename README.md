@@ -1,5 +1,5 @@
 # BLUETH: A web application that helps you learn new words via flashcards
-#### Video Demo:  https://youtu.be/zVeybSKQGvk
+
 #### Description:
 **BLUETH** is a web application that helps everyone learn vocabulary by using the same idea as flashcard. It provides a website where users can create and practice with virtual flashcards. The flashcards are ordered by users' fluency, when users practice with their flashcards, flashcards with words that users more fluent will appear last.
 The front-end of this project uses HTML, CSS, and Bootstrap 4.5. The back-end is written in Python (using framework Flask).
